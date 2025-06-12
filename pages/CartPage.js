@@ -13,26 +13,32 @@ class cartPage {
     this.shoppingCartLink = page.locator(
       inventoryLocators.shoppingCartLinkLocator
     );
+    this.product1Remove = page.locator(inventoryLocators.product1RemoveLocator);
+    this.product2Remove = page.locator(inventoryLocators.product2RemoveLocator);
+  }
+
+  async verifyCart() {
+    await expect(this.product1Title).toContainText("Sauce Labs Backpack");
+    await expect(this.product2Title).toContainText("Sauce Labs Bike Light");
   }
 
   async continueShopping() {
-    await expect(this.product1Title).toContainText("Sauce Labs Backpack");
-    await expect(this.product2Title).toContainText("Sauce Labs Bike Light");
-    console.log("assert product checkout from inventory page");
-
     await this.continueButton.click();
     await expect(this.titlePage).toContainText("Products");
     console.log("assert continue shopping button, back to inventory page");
-
-    await this.shoppingCartLink.click();
-    await expect(this.titlePage).toContainText("Your Cart");
-    console.log("assert shopping cart button, go to cart page");
   }
 
-  async checkoutShopping() {
+  async checkoutCart() {
     await this.checkoutButton.click();
-    await expect(this.titlePage).toContainText("heckout: Your Information");
+    await expect(this.titlePage).toContainText("Checkout: Your Information");
     console.log("assert checkout button, go to checkout step 1 page");
+  }
+
+  async removeCart() {
+    await this.product1Remove.click();
+    await this.product2Remove.click();
+    await expect(this.product1Title).not.toBeVisible();
+    await expect(this.product2Title).not.toBeVisible();
   }
 }
 

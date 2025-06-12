@@ -6,4 +6,5 @@ export const inventoryLocators = {
   shoppingCartBadgeLocator: '[data-test="shopping-cart-badge"]',
   shoppingCartLinkLocator: '[data-test="shopping-cart-link"]',
   pageTitleLocator: '[data-test="title"]',
+  productSortContainerLocator: '[data-test="product-sort-container"]',
 };

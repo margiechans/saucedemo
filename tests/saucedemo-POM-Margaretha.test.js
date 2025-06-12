@@ -28,9 +28,10 @@ test.describe("Saucedemo Test Case TC01 - TC11", (page) => {
     const CheckoutStep1Page = new checkoutStep1Page(page);
     const CheckoutStep2Page = new checkoutStep2Page(page);
     const CheckoutCompletePage = new checkoutCompletePage(page);
-    await LoginPage.goto();
-    await LoginPage.login("standard_user", "secret_sauce");
-    await LoginPage.verifyLogin();
+    await LoginPage.loginSuccess("standard_user", "secret_sauce");
+    //await LoginPage.goto();
+    //await LoginPage.login("standard_user", "secret_sauce");
+    //await LoginPage.verifyLogin();
     await InventoryPage.addProductToCart();
     await InventoryPage.removeProductFromCart();
     await InventoryPage.addProductToCart();
@@ -48,5 +49,19 @@ test.describe("Saucedemo Test Case TC01 - TC11", (page) => {
     await CheckoutStep2Page.finishCheckout();
     await CheckoutCompletePage.overviewCheckoutComplete();
     await CheckoutCompletePage.backToHome();
+  });
+
+  test("TC04 - Checkout with blank information", async ({ page }) => {
+    const LoginPage = new loginPage(page);
+    const InventoryPage = new inventoryPage(page);
+    const CartPage = new cartPage(page);
+    const CheckoutStep1Page = new checkoutStep1Page(page);
+    await LoginPage.goto();
+    await LoginPage.login("standard_user", "secret_sauce");
+    await LoginPage.verifyLogin();
+    await InventoryPage.addProductToCart();
+    await InventoryPage.gotoCart();
+    await CartPage.checkoutShopping();
+    await CheckoutStep1Page.fillCheckoutForm("", "", "");
   });
 });

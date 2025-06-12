@@ -14,6 +14,10 @@ class inventoryPage {
     this.shoppingCartLink = page.locator(
       inventoryLocators.shoppingCartLinkLocator
     );
+    this.pageTitle = page.locator(inventoryLocators.pageTitleLocator);
+    this.productSortContainer = page.locator(
+      inventoryLocators.productSortContainerLocator
+    );
   }
 
   async addProductToCart() {
@@ -32,7 +36,27 @@ class inventoryPage {
 
   async gotoCart() {
     await this.shoppingCartLink.click();
+    await expect(this.pageTitle).toContainText("Your Cart");
   }
+
+  async sortProductAsc() {
+    await this.productSortContainer.selectOption("az");
+    //belum ada expectnya
+  }
+
+  async sortProductDesc() {
+    await this.productSortContainer.selectOption("za");
+  }
+
+  async sortProductLow2High() {
+    await this.productSortContainer.selectOption("lohi");
+  }
+
+  async sortProductHigh2Low() {
+    await this.productSortContainer.selectOption("hilo");
+  }
+
+  async;
 }
 
 module.exports = { inventoryPage };

@@ -29,6 +29,8 @@ class checkoutStep1Page {
     await this.cancelButton.click();
     await expect(this.titlePage).toContainText("Your Cart");
   }
+
+  async verifyCheckout() {}
 }
 
 module.exports = { checkoutStep1Page };

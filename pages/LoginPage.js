@@ -34,6 +34,12 @@ class loginPage {
       console.log("Login Failed");
     }
   }
+
+  async loginSuccess(username, password) {
+    await this.goto();
+    await this.login(username, password);
+    await this.verifyLogin();
+  }
 }
 
 module.exports = { loginPage };
