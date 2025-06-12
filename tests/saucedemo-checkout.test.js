@@ -32,4 +32,9 @@ test.describe("Saucedemo Case Inventory", (page) => {
     await CheckoutCompletePage.overviewCheckoutComplete();
     await CheckoutCompletePage.backToHome();
   });
+  test("TC02 - Fill Checkout Form With Empty Data", async ({ page }) => {
+    const CheckoutStep1Page = new checkoutStep1Page(page);
+    await CheckoutStep1Page.fillCheckoutForm("", "", "");
+    await CheckoutStep1Page.verifyCheckout();
+  });
 });
