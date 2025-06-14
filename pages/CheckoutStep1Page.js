@@ -44,6 +44,18 @@ class checkoutStep1Page {
       );
     }
   }
+
+  async verifyCheckoutStep1() {
+    if (await this.errorMsg.isVisible()) {
+      await expect(this.errorMsg).toContainText(
+        "Error: First Name is required"
+      );
+    } else {
+      //checkout step 1 berhasil
+      await expect(this.page).toHaveURL(/.*checkout-step-two.html/);
+      await expect(this.titlePage).toContainText("Overview");
+    }
+  }
 }
 
 module.exports = { checkoutStep1Page };

@@ -18,6 +18,7 @@ test.describe("Saucedemo Case Inventory", (page) => {
     await InventoryPage.gotoCart();
     await CartPage.checkoutCart();
   });
+
   test("TC01 - Checkout Successfull", async ({ page }) => {
     const CheckoutStep1Page = new checkoutStep1Page(page);
     const CheckoutStep2Page = new checkoutStep2Page(page);
@@ -27,14 +28,18 @@ test.describe("Saucedemo Case Inventory", (page) => {
       "Kharisma",
       "112233"
     );
+    //add verify checkout step2
+    await CheckoutStep1Page.verifyCheckoutStep1();
     await CheckoutStep2Page.overviewCheckout();
     await CheckoutStep2Page.finishCheckout();
     await CheckoutCompletePage.overviewCheckoutComplete();
     await CheckoutCompletePage.backToHome();
   });
+
   test("TC02 - Fill Checkout Form With Empty Data", async ({ page }) => {
     const CheckoutStep1Page = new checkoutStep1Page(page);
     await CheckoutStep1Page.fillCheckoutForm("", "", "");
-    await CheckoutStep1Page.verifyCheckout();
+    //add verify checkout step2
+    await CheckoutStep1Page.verifyCheckoutStep1();
   });
 });

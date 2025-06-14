@@ -35,6 +35,19 @@ class loginPage {
     }
   }
 
+  async verifyLogin2(expected, expectedErrorMsg) {
+    if (expected === "success") {
+      // Login Berhasil
+      await expect(this.page).toHaveURL(/.*inventory.html/);
+      await expect(this.page.getByText("Swag Labs")).toBeVisible();
+      console.log("Login Success");
+    } else {
+      await expect(this.errorMsg).toBeVisible();
+      await expect(this.errorMsg).toContainText(expectedErrorMsg);
+      console.log("Login Failed");
+    }
+  }
+
   async loginSuccess(username, password) {
     await this.goto();
     await this.login(username, password);
